@@ -1,0 +1,64 @@
+server:
+  port: ${PORT :9091}
+
+spring:
+
+  main:
+    allow-bean-definition-overriding: true
+
+  application:
+    nem: legado
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    platform: org.hibernate.dialect.PostgreSQLDialect
+    url: jdbc:postgresql://localhost:5433/legado
+    username: legado
+    password: admin234
+    driverClassName: org.postgresql.Driver
+    initialization-node: always
+    initialize: true
+    hikari:
+      connectionTimeout : 20000
+      maximumPoolSize : 5
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create-drop
+      format_sql: true
+
+  rabbitmaq:
+    host: ${RABBIT_MQ_HOST:localhost}
+    port: ${RABBIT_MQ_PORT:5672}
+    usarname: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+
+app-config:
+
+    services:
+      vendas: ${http://LOGISTICA_HOST:localhost}:${LOGISTICA_HOST:8083}
+
+    secrets:
+      api-secrets: ${API_SECRET:ZHVrZWNvcmFqb3NvY29kaWdvZW1iYXNlNjRlbmNvbmRlcg==}
+
+    rabbit:
+      exchange:
+        produto: produto.topic
+
+      routingKey:
+        produto-estoque: produto-estoque.update.routinKey
+        andamento-entrega: andamento-entrega.update.routinKey
+        entrega-confirmada: entrega-confirmada.update.routinKey
+
+      queue:
+        produto-estoque: produto-estoque.update.queue
+        andamento-entrega: andamento-entrega.update.routinKey
+        entrega-confirmada: entrega-confirmada.update.queue
+
