@@ -15,9 +15,9 @@ spring:
 
   datasource:
     platform: org.hibernate.dialect.PostgreSQLDialect
-    url: jdbc:postgresql://localhost:5433/legado
-    username: legado
-    password: admin234
+    url: jdbc:postgresql://${HOST:localhost}:${DB_PORT :5433}/${DATA_BASE:legado}
+    username: ${DB_USER:legado}
+    password: ${DB_PASSWORD:admin234}
     driverClassName: org.postgresql.Driver
     initialization-node: always
     initialize: true
