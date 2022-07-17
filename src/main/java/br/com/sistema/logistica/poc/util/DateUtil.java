@@ -4,6 +4,10 @@ import java.util.Calendar;
 
 public class DateUtil {
 
+    public DateUtil(){
+
+    }
+
     public  static String getInicioAnoVigente(){
         return getAno().toString()+"-01-01";
     }

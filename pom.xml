@@ -21,11 +21,11 @@
 		<com.squareup.version>4.0.1</com.squareup.version>
 		<!-- Sonar Config -->
 		<sonar.coverage.exclusions>
-			**/PocApplication/**/*
-			**/LegadoController/**/*
 			**/config/**/*,
 			**/dto/**/*,
-			**/mock_legado/**/*
+			**/mock_legado/**/*,
+			**/*PocApplication.java,
+			**/*LegadoController.java
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>

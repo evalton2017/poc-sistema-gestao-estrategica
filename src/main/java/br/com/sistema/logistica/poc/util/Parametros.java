@@ -1,8 +1,5 @@
 package br.com.sistema.logistica.poc.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Parametros {
 
     public static String[] ESTADOS = { "Acre",

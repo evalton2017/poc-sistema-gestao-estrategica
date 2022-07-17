@@ -25,12 +25,10 @@ public class EntregaService {
 
     private static final String ENTREGUE = "ENTREGUE";
     private static final String A_CAMINHO = "A CAMINHO";
-    private static final String SAIU_PARA_ENTREGA = "SAIU PARA ENTREGA";
     private static final String DEVOLVIDO = "DEVOLVIDO";
-    private static final String ATRASO = "ATRASO";
 
     @Autowired
-    EntregaRepository entregaRepository;
+    private EntregaRepository entregaRepository;
 
     public  DadosGraficoResponse dadosGraficoEntrega(){
         DadosGraficoResponse dadosGraficoResponse = new DadosGraficoResponse();
@@ -56,7 +54,7 @@ public class EntregaService {
             var entregasPorEstadoFiltro = entregas.stream().filter(e -> e.getEstado().equals(Parametros.ESTADOS[finalI]))
                     .collect(Collectors.toList());
 
-            Map<String, Long> agrupamentoEntregas = entregasPorEstadoFiltro.stream().collect(Collectors.groupingBy(e -> e.getEstado(), Collectors.counting()));
+            Map<String, Long> agrupamentoEntregas = entregasPorEstadoFiltro.stream().collect(Collectors.groupingBy(RelatorioEntregasResponse::getEstado, Collectors.counting()));
 
             agrupamentoEntregas.forEach((k,v) -> {
                 RelatorioTransportadoraResponse finalizada = new RelatorioTransportadoraResponse();
@@ -78,7 +76,14 @@ public class EntregaService {
 
         var entregasFinalizadas = entregas.stream().filter(e -> e.getSituacaoEntrega().equals(filtro)).collect(Collectors.toList());
 
-        Map<String, Long> agrupamentoEntregas = entregasFinalizadas.stream().collect(Collectors.groupingBy(e -> e.getNomeTransportadora(), Collectors.counting()));
+        agruparEntregaFinalizada(finalizadas, entregasFinalizadas);
+
+        return finalizadas;
+
+    }
+
+    private void agruparEntregaFinalizada(List<RelatorioTransportadoraResponse> finalizadas, List<RelatorioEntregasResponse> entregasFinalizadas) {
+        Map<String, Long> agrupamentoEntregas = agrupaEntregas(entregasFinalizadas);
 
         agrupamentoEntregas.forEach((k,v) -> {
             RelatorioTransportadoraResponse finalizada = new RelatorioTransportadoraResponse();
@@ -86,10 +91,8 @@ public class EntregaService {
             finalizada.setQuantidade(v.intValue());
             finalizadas.add(finalizada);
         });
-
-        return finalizadas;
-
     }
+
 
     public  DadosGraficoResponse dadosGraficoEntregaFiltro(FiltroRelatorioRequest filtro){
         DadosGraficoResponse dadosGraficoResponse = new DadosGraficoResponse();
@@ -125,18 +128,15 @@ public class EntregaService {
 
         var entregasAtrasadas = filtrarEntregasAtradas(entregas);
 
-        Map<String, Long> agrupamentoEntregas = entregasAtrasadas.stream().collect(Collectors.groupingBy(e -> e.getNomeTransportadora(), Collectors.counting()));
-
-        agrupamentoEntregas.forEach((k,v) -> {
-            RelatorioTransportadoraResponse atrasada = new RelatorioTransportadoraResponse();
-            atrasada.setNomeTransportadora(k);
-            atrasada.setQuantidade(v.intValue());
-            atrasadas.add(atrasada);
-        });
+        agruparEntregaFinalizada(atrasadas, entregasAtrasadas);
         dadosGraficoResponse.setRelatorio(entregasAtrasadas);
         dadosGraficoResponse.setAtrasadas(atrasadas);
 
 
+    }
+
+    private Map<String, Long> agrupaEntregas(List<RelatorioEntregasResponse> entregas){
+        return entregas.stream().collect(Collectors.groupingBy(RelatorioEntregasResponse::getNomeTransportadora, Collectors.counting()));
     }
 
     private List<RelatorioEntregasResponse> filtrarEntregasAtradas(List<RelatorioEntregasResponse> entregas) throws ParseException {
