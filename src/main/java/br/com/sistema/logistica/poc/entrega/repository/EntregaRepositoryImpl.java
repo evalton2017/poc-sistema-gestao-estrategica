@@ -1,7 +1,7 @@
-package br.com.sistema.logistica.poc.entrega.dto.repository;
+package br.com.sistema.logistica.poc.entrega.repository;
 
 import br.com.sistema.logistica.poc.entrega.dto.FiltroRelatorioRequest;
-import br.com.sistema.logistica.poc.moc_legado.EntregaLegado;
+import br.com.sistema.logistica.poc.mock_legado.EntregaLegado;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

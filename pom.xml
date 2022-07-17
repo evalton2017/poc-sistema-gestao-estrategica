@@ -16,6 +16,9 @@
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.0</spring-cloud.version>
+		<jacoco.version>0.8.6</jacoco.version>
+		<poi.version>4.1.0</poi.version>
+		<com.squareup.version>4.0.1</com.squareup.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -114,6 +117,23 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -122,6 +142,26 @@
 			<type>pom</type>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 
 
 	</dependencies>
@@ -139,6 +179,41 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*br/com/sistema/logistica/poc/PocApplication.class</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/config/**</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/entrega/dto/legado/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/entrega/dto/**</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/entrega/LegadoController.class/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/mock_legado/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/cliente/dto/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/depositos/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/fornecedor/</exclude>
+						<exclude>**/*br/com/sistema/logistica/poc/mercadoria/</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

@@ -1,4 +1,4 @@
-package br.com.sistema.logistica.poc.moc_legado;
+package br.com.sistema.logistica.poc.mock_legado;
 
 import javax.persistence.*;
 

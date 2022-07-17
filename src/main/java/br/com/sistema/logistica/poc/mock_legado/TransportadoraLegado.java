@@ -1,4 +1,4 @@
-package br.com.sistema.logistica.poc.moc_legado;
+package br.com.sistema.logistica.poc.mock_legado;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,16 +12,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name= "CLIENTE_LEGADO")
-public class ClienteLegado {
+@Table(name= "TRANSPORTADORA_LEGADO")
+public class TransportadoraLegado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idClienteLegado;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long idTransportadora;
 
     @Column(nullable = false)
-    private String nomeCliente;
+    private String nomeTransportadora;
 
     @Column(nullable = false)
-    private String cpfCnpj;
+    private String cnpj;
 }

@@ -1,8 +1,7 @@
-package br.com.sistema.logistica.poc.entrega.dto.repository;
+package br.com.sistema.logistica.poc.entrega.repository;
 
 import br.com.sistema.logistica.poc.entrega.dto.FiltroRelatorioRequest;
-import br.com.sistema.logistica.poc.moc_legado.EntregaLegado;
-import org.springframework.data.jpa.repository.Query;
+import br.com.sistema.logistica.poc.mock_legado.EntregaLegado;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;

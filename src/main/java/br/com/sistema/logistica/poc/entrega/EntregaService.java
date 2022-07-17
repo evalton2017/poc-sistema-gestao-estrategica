@@ -5,6 +5,7 @@ import br.com.sistema.logistica.poc.entrega.dto.DadosGraficoResponse;
 import br.com.sistema.logistica.poc.entrega.dto.FiltroRelatorioRequest;
 import br.com.sistema.logistica.poc.entrega.dto.RelatorioEntregasResponse;
 import br.com.sistema.logistica.poc.entrega.dto.RelatorioTransportadoraResponse;
+import br.com.sistema.logistica.poc.entrega.repository.EntregaRepository;
 import br.com.sistema.logistica.poc.util.DateUtil;
 import br.com.sistema.logistica.poc.util.Parametros;
 import org.springframework.beans.factory.annotation.Autowired;

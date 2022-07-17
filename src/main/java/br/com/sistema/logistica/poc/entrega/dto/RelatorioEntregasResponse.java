@@ -1,6 +1,6 @@
 package br.com.sistema.logistica.poc.entrega.dto;
 
-import br.com.sistema.logistica.poc.moc_legado.EntregaLegado;
+import br.com.sistema.logistica.poc.mock_legado.EntregaLegado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
