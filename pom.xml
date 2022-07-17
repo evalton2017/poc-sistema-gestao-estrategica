@@ -19,6 +19,14 @@
 		<jacoco.version>0.8.6</jacoco.version>
 		<poi.version>4.1.0</poi.version>
 		<com.squareup.version>4.0.1</com.squareup.version>
+		<!-- Sonar Config -->
+		<sonar.coverage.exclusions>
+			**/PocApplication/**/*
+			**/LegadoController/**/*
+			**/config/**/*,
+			**/dto/**/*,
+			**/mock_legado/**/*
+		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -192,9 +200,6 @@
 						<exclude>**/*br/com/sistema/logistica/poc/entrega/LegadoController.class/</exclude>
 						<exclude>**/*br/com/sistema/logistica/poc/mock_legado/</exclude>
 						<exclude>**/*br/com/sistema/logistica/poc/cliente/dto/</exclude>
-						<exclude>**/*br/com/sistema/logistica/poc/depositos/</exclude>
-						<exclude>**/*br/com/sistema/logistica/poc/fornecedor/</exclude>
-						<exclude>**/*br/com/sistema/logistica/poc/mercadoria/</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -228,5 +233,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
