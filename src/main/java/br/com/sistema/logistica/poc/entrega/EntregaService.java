@@ -49,9 +49,9 @@ public class EntregaService {
 
         List<RelatorioTransportadoraResponse> locais = new ArrayList<>();
 
-        for(int i=0;i<Parametros.ESTADOS.length; i++){
+        for(int i=0;i<Parametros.LISTA_ESTADOS().size(); i++){
             int finalI = i;
-            var entregasPorEstadoFiltro = entregas.stream().filter(e -> e.getEstado().equals(Parametros.ESTADOS[finalI]))
+            var entregasPorEstadoFiltro = entregas.stream().filter(e -> e.getEstado().equals(Parametros.LISTA_ESTADOS().get(finalI)))
                     .collect(Collectors.toList());
 
             Map<String, Long> agrupamentoEntregas = entregasPorEstadoFiltro.stream().collect(Collectors.groupingBy(RelatorioEntregasResponse::getEstado, Collectors.counting()));

@@ -1,8 +1,16 @@
 package br.com.sistema.logistica.poc.util;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Parametros {
 
-    public static String[] ESTADOS = { "Acre",
+    private Parametros(){
+
+    }
+
+    private static final String[] ESTADOS = { "Acre",
            "Alagoas",
            "Amapá",
            "Amazonas",
@@ -30,4 +38,10 @@ public class Parametros {
            "Sergipe",
            "Tocantins"
     };
+
+    public static List<String> LISTA_ESTADOS(){
+        return Collections.unmodifiableList(Arrays.asList(ESTADOS));
+    }
+
+
 }

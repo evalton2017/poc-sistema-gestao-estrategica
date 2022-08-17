@@ -18,17 +18,14 @@ public class EntregaRepositoryImpl implements CustomRepository{
     public List<EntregaLegado> findByEntrega(FiltroRelatorioRequest filtro) {
         StringBuilder query = montaQueryBuscaEntregas();
         adicionarFiltros(filtro,query);
-        List lista = entityManager.createQuery(query.toString()).getResultList();
-        return lista;
+        return entityManager.createQuery(query.toString()).getResultList();
     }
 
     @Override
     public List<EntregaLegado> findByEntregaByDataPedido(String inicio, String fim) {
         StringBuilder query = montaQueryBuscaEntregas();
         query.append("AND p.dataPedido BETWEEN ").append("'"+inicio+"' AND "+"'"+fim+"'");
-        List lista = entityManager.createQuery(query.toString()).getResultList();
-        return lista;
-
+        return entityManager.createQuery(query.toString()).getResultList();
     }
 
     private StringBuilder montaQueryBuscaEntregas() {

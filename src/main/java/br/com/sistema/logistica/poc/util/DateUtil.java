@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class DateUtil {
 
-    public DateUtil(){
+    private DateUtil(){
 
     }
 
